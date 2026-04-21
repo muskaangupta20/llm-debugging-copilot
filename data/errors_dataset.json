@@ -1,0 +1,62 @@
+[
+  {
+    "error": "ModuleNotFoundError: No module named 'pandas'",
+    "context": "Python",
+    "explanation": "Python cannot find the pandas library because it is not installed in your environment.",
+    "solution": "Run 'pip install pandas' in your terminal. If using a virtual environment, make sure it is activated before installing."
+  },
+  {
+    "error": "IndentationError: unexpected indent",
+    "context": "Python",
+    "explanation": "There is inconsistent or incorrect indentation in your code.",
+    "solution": "Check for extra spaces or tabs. Ensure consistent indentation (usually 4 spaces per level)."
+  },
+  {
+    "error": "TypeError: unsupported operand type(s) for +: 'int' and 'str'",
+    "context": "Python",
+    "explanation": "You are trying to add a number and a string, which is not allowed.",
+    "solution": "Convert the string to an integer using int() or the integer to a string using str() before adding."
+  },
+  {
+    "error": "NameError: name 'df' is not defined",
+    "context": "Python / Pandas",
+    "explanation": "The variable 'df' has not been created or is out of scope.",
+    "solution": "Make sure you have defined 'df' before using it and that it is in the correct scope."
+  },
+  {
+    "error": "FileNotFoundError: [Errno 2] No such file or directory",
+    "context": "Python",
+    "explanation": "The file path provided does not exist or is incorrect.",
+    "solution": "Check the file path and ensure the file exists. Use absolute paths or verify your working directory."
+  },
+  {
+    "error": "AnalysisException: Path does not exist",
+    "context": "Spark",
+    "explanation": "Spark cannot find the specified file or directory in the given path.",
+    "solution": "Verify the path (especially for HDFS/ADLS). Ensure the file exists and permissions are correct."
+  },
+  {
+    "error": "InvalidHttpRequestToLivy: Your Spark job requested 12 vcores but workspace has 0 core limit",
+    "context": "Azure Synapse",
+    "explanation": "Your Spark job is requesting more compute resources than your workspace allows.",
+    "solution": "Reduce the number of requested vcores or request a quota increase in Azure Synapse workspace settings."
+  },
+  {
+    "error": "HttpRequestFailedWithClientError: 404 NotFound",
+    "context": "Azure Data Factory",
+    "explanation": "The API endpoint or URL is incorrect or does not exist.",
+    "solution": "Check the base URL and endpoint. Ensure the base URL ends with '/' and parameters are correct."
+  },
+  {
+    "error": "ValueError: could not convert string to float",
+    "context": "Python",
+    "explanation": "The string contains non-numeric values that cannot be converted to float.",
+    "solution": "Clean the data before conversion (remove symbols, text, or missing values)."
+  },
+  {
+    "error": "PermissionDenied: 403 Forbidden",
+    "context": "API / Cloud",
+    "explanation": "You do not have permission to access the resource.",
+    "solution": "Check API keys, authentication tokens, and permissions. Ensure credentials are correctly configured."
+  }
+]
