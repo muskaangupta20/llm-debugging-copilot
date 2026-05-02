@@ -1,62 +1,254 @@
 [
   {
     "error": "ModuleNotFoundError: No module named 'pandas'",
-    "context": "Python",
-    "explanation": "Python cannot find the pandas library because it is not installed in your environment.",
-    "solution": "Run 'pip install pandas' in your terminal. If using a virtual environment, make sure it is activated before installing."
+    "platform": "Python",
+    "context": "Local Python environment for data analysis assignment",
+    "tags": ["python", "packages", "virtualenv", "pandas"],
+    "explanation": "Python cannot import pandas because the package is missing from the active environment or a different interpreter is being used.",
+    "root_cause": "The student installed pandas in one environment but ran the notebook or script in another, or pandas was never installed.",
+    "fix_steps": [
+      "Check which Python interpreter is running the script.",
+      "Run pip show pandas or python -m pip show pandas.",
+      "Install pandas in the active environment with python -m pip install pandas.",
+      "Restart the notebook kernel or terminal session after installation."
+    ],
+    "common_mistakes": [
+      "Installing with pip from a different Python interpreter.",
+      "Forgetting to activate the virtual environment before running the script."
+    ],
+    "solution": "Install pandas in the same environment that runs the code and restart the session if needed.",
+    "source_type": "official_docs",
+    "source_url": "https://pandas.pydata.org/docs/"
   },
   {
     "error": "IndentationError: unexpected indent",
-    "context": "Python",
-    "explanation": "There is inconsistent or incorrect indentation in your code.",
-    "solution": "Check for extra spaces or tabs. Ensure consistent indentation (usually 4 spaces per level)."
+    "platform": "Python",
+    "context": "Beginner Python assignment using loops and functions",
+    "tags": ["python", "syntax", "indentation"],
+    "explanation": "Python found an indentation level that does not match the surrounding block structure.",
+    "root_cause": "The file mixes tabs and spaces or contains an extra leading indent on a line that should align with the previous block.",
+    "fix_steps": [
+      "Open the file in an editor that shows spaces and tabs.",
+      "Align the line with the intended block level.",
+      "Convert tabs to spaces and keep indentation consistent.",
+      "Re-run the script after formatting the affected section."
+    ],
+    "common_mistakes": [
+      "Copy-pasting code from different sources with mixed indentation.",
+      "Indenting a line before starting a new block with a colon."
+    ],
+    "solution": "Use consistent indentation, preferably 4 spaces per level, and remove unexpected leading whitespace.",
+    "source_type": "official_docs",
+    "source_url": "https://docs.python.org/3/tutorial/"
   },
   {
     "error": "TypeError: unsupported operand type(s) for +: 'int' and 'str'",
-    "context": "Python",
-    "explanation": "You are trying to add a number and a string, which is not allowed.",
-    "solution": "Convert the string to an integer using int() or the integer to a string using str() before adding."
+    "platform": "Python",
+    "context": "Python assignment processing CSV or user input values",
+    "tags": ["python", "types", "casting"],
+    "explanation": "The code is trying to combine a string value with an integer using addition.",
+    "root_cause": "User input and CSV columns often arrive as strings, but the code assumes they are already numeric.",
+    "fix_steps": [
+      "Print or inspect the type of both variables before adding them.",
+      "Convert numeric-looking strings with int() or float().",
+      "Use str() if the goal is string concatenation rather than arithmetic.",
+      "Validate input values before performing operations."
+    ],
+    "common_mistakes": [
+      "Using input() and assuming it returns a number.",
+      "Reading numeric data from a file without casting it first."
+    ],
+    "solution": "Convert values to compatible types before adding them.",
+    "source_type": "official_docs",
+    "source_url": "https://docs.python.org/3/library/functions.html"
   },
   {
     "error": "NameError: name 'df' is not defined",
-    "context": "Python / Pandas",
-    "explanation": "The variable 'df' has not been created or is out of scope.",
-    "solution": "Make sure you have defined 'df' before using it and that it is in the correct scope."
+    "platform": "Python / Pandas",
+    "context": "Notebook-based data analysis assignment",
+    "tags": ["python", "pandas", "notebook", "scope"],
+    "explanation": "The variable df does not exist in the current execution context.",
+    "root_cause": "The dataframe creation cell was never run, the variable name changed, or execution order in the notebook is inconsistent.",
+    "fix_steps": [
+      "Search for where df is first assigned.",
+      "Run the setup and data-loading cells in order.",
+      "Check for typos such as data_frame versus df.",
+      "Confirm the variable is defined in the same scope where it is used."
+    ],
+    "common_mistakes": [
+      "Running notebook cells out of order.",
+      "Renaming a variable in one cell but not the others."
+    ],
+    "solution": "Define df before using it and ensure notebook cells run in the correct order.",
+    "source_type": "coursework",
+    "source_url": "internal_course_dataset"
   },
   {
     "error": "FileNotFoundError: [Errno 2] No such file or directory",
-    "context": "Python",
-    "explanation": "The file path provided does not exist or is incorrect.",
-    "solution": "Check the file path and ensure the file exists. Use absolute paths or verify your working directory."
+    "platform": "Python",
+    "context": "Assignment reads local CSV or JSON files",
+    "tags": ["python", "files", "paths"],
+    "explanation": "Python could not find the file at the path provided by the program.",
+    "root_cause": "The relative path is wrong for the current working directory, or the file name differs from what the script expects.",
+    "fix_steps": [
+      "Print the current working directory with os.getcwd().",
+      "Check whether the file exists at the given path.",
+      "Use pathlib.Path to build a stable path relative to the script or notebook.",
+      "Correct spelling, extension, or folder names."
+    ],
+    "common_mistakes": [
+      "Assuming the notebook directory and script directory are the same.",
+      "Forgetting file extensions such as .csv or .json."
+    ],
+    "solution": "Verify the file path, working directory, and exact filename.",
+    "source_type": "official_docs",
+    "source_url": "https://docs.python.org/3/library/pathlib.html"
   },
   {
     "error": "AnalysisException: Path does not exist",
-    "context": "Spark",
-    "explanation": "Spark cannot find the specified file or directory in the given path.",
-    "solution": "Verify the path (especially for HDFS/ADLS). Ensure the file exists and permissions are correct."
+    "platform": "Spark",
+    "context": "Spark batch job reading parquet or CSV from cloud storage",
+    "tags": ["spark", "storage", "paths", "hdfs", "adls"],
+    "explanation": "Spark cannot access the file or folder path supplied to the read operation.",
+    "root_cause": "The path is wrong, the mounted storage location is missing, or the user lacks permission to the underlying storage.",
+    "fix_steps": [
+      "Copy the exact path from the storage browser rather than typing it manually.",
+      "Check whether the path uses the correct scheme such as abfss:// or dbfs:/.",
+      "List the parent directory to confirm the file exists.",
+      "Verify storage permissions and mount configuration."
+    ],
+    "common_mistakes": [
+      "Mixing local file paths with distributed storage paths.",
+      "Using the wrong workspace or container name in the URI."
+    ],
+    "solution": "Validate the Spark path format, storage location, and permissions.",
+    "source_type": "official_docs",
+    "source_url": "https://spark.apache.org/docs/latest/sql-data-sources.html"
   },
   {
     "error": "InvalidHttpRequestToLivy: Your Spark job requested 12 vcores but workspace has 0 core limit",
-    "context": "Azure Synapse",
-    "explanation": "Your Spark job is requesting more compute resources than your workspace allows.",
-    "solution": "Reduce the number of requested vcores or request a quota increase in Azure Synapse workspace settings."
+    "platform": "Azure Synapse",
+    "context": "Azure Synapse Spark pool assignment",
+    "tags": ["azure", "synapse", "spark", "quota", "livy"],
+    "explanation": "The requested Spark job size exceeds the compute quota available in the Synapse workspace.",
+    "root_cause": "The workspace has no remaining cores for the requested pool size, or the quota was never enabled for that subscription or region.",
+    "fix_steps": [
+      "Open Synapse workspace quota settings and review available cores.",
+      "Reduce the requested driver and executor size.",
+      "Try a smaller Spark pool for the assignment.",
+      "Request a quota increase if the workspace should support larger jobs."
+    ],
+    "common_mistakes": [
+      "Copying production-sized Spark settings into a student workspace.",
+      "Assuming the default workspace has usable compute quota."
+    ],
+    "solution": "Lower the requested compute or increase workspace quota.",
+    "source_type": "official_docs",
+    "source_url": "https://learn.microsoft.com/azure/synapse-analytics/"
   },
   {
     "error": "HttpRequestFailedWithClientError: 404 NotFound",
-    "context": "Azure Data Factory",
-    "explanation": "The API endpoint or URL is incorrect or does not exist.",
-    "solution": "Check the base URL and endpoint. Ensure the base URL ends with '/' and parameters are correct."
+    "platform": "Azure Data Factory",
+    "context": "REST connector or pipeline assignment",
+    "tags": ["azure", "data-factory", "api", "404", "rest"],
+    "explanation": "The pipeline sent a request to an endpoint that the server could not find.",
+    "root_cause": "The base URL, route, resource name, or parameterization in the pipeline is incorrect.",
+    "fix_steps": [
+      "Print or inspect the final resolved request URL.",
+      "Confirm the dataset and linked service are using the correct base URL.",
+      "Check for missing trailing slashes or incorrect path parameters.",
+      "Test the same URL outside Data Factory with Postman or curl."
+    ],
+    "common_mistakes": [
+      "Using a documentation placeholder URL in the pipeline.",
+      "Confusing resource IDs with display names."
+    ],
+    "solution": "Verify the final request URL and each path parameter used to build it.",
+    "source_type": "official_docs",
+    "source_url": "https://learn.microsoft.com/azure/data-factory/"
   },
   {
     "error": "ValueError: could not convert string to float",
-    "context": "Python",
-    "explanation": "The string contains non-numeric values that cannot be converted to float.",
-    "solution": "Clean the data before conversion (remove symbols, text, or missing values)."
+    "platform": "Python",
+    "context": "Data cleaning or ML preprocessing assignment",
+    "tags": ["python", "data-cleaning", "casting", "float"],
+    "explanation": "The value being converted contains text, symbols, or missing-value markers that are not valid floats.",
+    "root_cause": "Raw data often includes commas, currency signs, empty strings, or labels mixed into numeric columns.",
+    "fix_steps": [
+      "Inspect a few failing values from the column.",
+      "Strip currency symbols, commas, or whitespace before conversion.",
+      "Handle missing values such as empty strings or NA markers.",
+      "Convert with pandas.to_numeric(..., errors='coerce') when appropriate."
+    ],
+    "common_mistakes": [
+      "Applying float() directly to an entire dirty column.",
+      "Ignoring non-numeric placeholders in CSV files."
+    ],
+    "solution": "Clean or coerce non-numeric values before converting them to float.",
+    "source_type": "official_docs",
+    "source_url": "https://pandas.pydata.org/docs/"
   },
   {
     "error": "PermissionDenied: 403 Forbidden",
-    "context": "API / Cloud",
-    "explanation": "You do not have permission to access the resource.",
-    "solution": "Check API keys, authentication tokens, and permissions. Ensure credentials are correctly configured."
+    "platform": "API / Cloud",
+    "context": "Cloud assignment using storage or REST APIs",
+    "tags": ["auth", "permissions", "cloud", "api", "403"],
+    "explanation": "The request reached the service, but the credentials do not allow access to that resource.",
+    "root_cause": "The token is missing required scopes, the key is invalid for the target resource, or the account lacks RBAC permissions.",
+    "fix_steps": [
+      "Confirm which identity or key the code is using.",
+      "Check whether the resource allows that identity to read or write.",
+      "Regenerate or refresh expired credentials.",
+      "Retry the request only after verifying the permission model."
+    ],
+    "common_mistakes": [
+      "Using one service's key to access another service.",
+      "Confusing authentication success with authorization success."
+    ],
+    "solution": "Verify both the credentials and the resource-level permissions.",
+    "source_type": "official_docs",
+    "source_url": "https://learn.microsoft.com/azure/"
+  },
+  {
+    "error": "AuthorizationPermissionMismatch: This request is not authorized to perform this operation using this permission",
+    "platform": "Azure Storage",
+    "context": "ADLS or Blob Storage assignment using service principal or SAS credentials",
+    "tags": ["azure", "storage", "rbac", "permissions", "adls", "blob"],
+    "explanation": "The request reached Azure Storage, but the identity or token does not have the specific permission required for that operation.",
+    "root_cause": "Authentication succeeded, but the caller lacks the needed storage role, ACL, SAS permission, or container-level access for the requested read or write.",
+    "fix_steps": [
+      "Confirm which identity, SAS token, or key is being used for the request.",
+      "Check whether the identity has the correct Azure role such as Storage Blob Data Reader or Contributor.",
+      "If using ADLS Gen2, verify filesystem and path ACLs in addition to RBAC.",
+      "If using a SAS token, confirm it includes the exact permissions needed for the operation."
+    ],
+    "common_mistakes": [
+      "Assuming login success means storage authorization is also correct.",
+      "Checking RBAC but forgetting ADLS Gen2 ACLs."
+    ],
+    "solution": "Verify the exact identity and make sure both RBAC and any path-level storage permissions allow the operation.",
+    "source_type": "official_docs",
+    "source_url": "https://learn.microsoft.com/azure/storage/common/"
+  },
+  {
+    "error": "HttpResponseError: Operation returned an invalid status 'Not Found'",
+    "platform": "Azure REST / SDK",
+    "context": "Azure SDK assignment calling storage, management, or data endpoints",
+    "tags": ["azure", "sdk", "404", "resource-id", "endpoint"],
+    "explanation": "The SDK call reached Azure, but the target resource, container, endpoint, or path could not be found.",
+    "root_cause": "The request often uses the wrong account name, container name, endpoint URL, subscription resource path, or object path even though authentication is otherwise valid.",
+    "fix_steps": [
+      "Print the fully resolved endpoint, account, container, or resource ID being used.",
+      "Check for typos in container names, filesystem names, and account names.",
+      "Confirm the code is pointing to the correct subscription, resource group, or workspace.",
+      "Test the same target with a portal check or a known working CLI/SDK call."
+    ],
+    "common_mistakes": [
+      "Using a valid credential against the wrong storage account or workspace.",
+      "Confusing a display name with the real resource path or identifier."
+    ],
+    "solution": "Verify the exact target endpoint and resource identifiers before changing credentials.",
+    "source_type": "official_docs",
+    "source_url": "https://learn.microsoft.com/azure/developer/python/"
   }
 ]

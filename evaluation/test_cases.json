@@ -1,0 +1,86 @@
+[
+  {
+    "id": "python_missing_package",
+    "error_message": "ModuleNotFoundError: No module named 'pandas'",
+    "environment": "Python",
+    "assignment_context": "Working on a data analysis homework in a virtual environment.",
+    "code_snippet": "import pandas as pd\ndf = pd.read_csv('sales.csv')",
+    "expected_focus": [
+      "active environment",
+      "install pandas",
+      "restart kernel"
+    ]
+  },
+  {
+    "id": "python_file_path",
+    "error_message": "FileNotFoundError: [Errno 2] No such file or directory: 'data/train.csv'",
+    "environment": "Python",
+    "assignment_context": "Training a model from a CSV in a notebook.",
+    "code_snippet": "df = pd.read_csv('data/train.csv')",
+    "expected_focus": [
+      "working directory",
+      "verify file path",
+      "filename"
+    ]
+  },
+  {
+    "id": "spark_storage_path",
+    "error_message": "AnalysisException: Path does not exist",
+    "environment": "Spark",
+    "assignment_context": "Reading parquet files from ADLS in a Spark notebook.",
+    "code_snippet": "df = spark.read.parquet('abfss://data@account.dfs.core.windows.net/missing-folder/')",
+    "expected_focus": [
+      "verify path",
+      "storage scheme",
+      "permissions"
+    ]
+  },
+  {
+    "id": "azure_quota_issue",
+    "error_message": "InvalidHttpRequestToLivy: Your Spark job requested 12 vcores but workspace has 0 core limit",
+    "environment": "Azure Synapse",
+    "assignment_context": "Running an assignment notebook in a student Synapse workspace.",
+    "code_snippet": "spark.conf.set('spark.executor.cores', '4')\nspark.conf.set('spark.executor.instances', '3')",
+    "expected_focus": [
+      "quota",
+      "reduce requested compute",
+      "request increase"
+    ]
+  },
+  {
+    "id": "azure_rest_404",
+    "error_message": "HttpRequestFailedWithClientError: 404 NotFound",
+    "environment": "Azure Data Factory",
+    "assignment_context": "Calling a REST API from a Data Factory pipeline.",
+    "code_snippet": "",
+    "expected_focus": [
+      "final request url",
+      "base url",
+      "path parameters"
+    ]
+  },
+  {
+    "id": "azure_storage_permission_mismatch",
+    "error_message": "AuthorizationPermissionMismatch: This request is not authorized to perform this operation using this permission",
+    "environment": "Azure Storage",
+    "assignment_context": "Writing assignment output files to ADLS Gen2 using a service principal.",
+    "code_snippet": "service_client.get_file_system_client('assignment-data').get_file_client('outputs/result.csv').upload_data(data)",
+    "expected_focus": [
+      "correct identity",
+      "storage role",
+      "acl"
+    ]
+  },
+  {
+    "id": "azure_sdk_not_found",
+    "error_message": "HttpResponseError: Operation returned an invalid status 'Not Found'",
+    "environment": "Azure REST / SDK",
+    "assignment_context": "Using an Azure SDK client to read from a storage container for a class assignment.",
+    "code_snippet": "container_client = blob_service_client.get_container_client('assignmnt-data')\nblobs = list(container_client.list_blobs())",
+    "expected_focus": [
+      "endpoint",
+      "container name",
+      "resource identifier"
+    ]
+  }
+]
